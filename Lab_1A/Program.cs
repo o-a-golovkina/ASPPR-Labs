@@ -42,7 +42,6 @@ class Program
                         Console.ResetColor();
                     }
                     Console.WriteLine("\n");
-
                     break;
 
                 case 2:
@@ -63,6 +62,37 @@ class Program
                     break;
 
                 case 3:
+                    Console.Write(UIStrings.M3Size);
+                    int n = GetValidMenuChoice(2, 100);
+
+                    Console.WriteLine($"\n--- Заповнення матриці А {n}x{n} ---");
+                    myMatrix = FillMatrixFromConsole(n, n);
+
+                    Console.WriteLine("\n");
+
+                    Console.WriteLine($"\n--- Заповнення матриці B {n}x{1} ---");
+                    double[,] matrixB = FillMatrixFromConsole(n, 1);
+
+                    Console.WriteLine("\n");
+
+                    if (InverseMatrix(myMatrix) == null)
+                    {
+                        Console.WriteLine("\n");
+                        break;
+                    }
+
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine($"\n--- Обернена матриця A ---");
+
+                    PrintMatrix(InverseMatrix(myMatrix), "invers");
+
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("\n");
+                    Console.WriteLine($"\n--- Обчислення розв'язків Х ---");
+                    Console.WriteLine(VectorX(InverseMatrix(myMatrix), matrixB));
+
+                    Console.WriteLine();
+                    Console.ResetColor();
                     break;
             }
         }
@@ -255,6 +285,22 @@ class Program
         }
 
         return rank;
+    }
+
+    static string VectorX(double[,] matrixA, double[,] matrixB)
+    {
+        string str = "";
+        double x;
+        for (int i = 0; i < matrixA.GetLength(0); i++)
+        {
+            x = 0;
+            for (int j = 0; j < matrixA.GetLength(0); j++)
+                x += matrixB[j, 0] * matrixA[i, j];
+
+            str += $"\nX[{i + 1}] = {x:F3}";
+        }
+
+        return str;
     }
 
     static void PrintMatrix(double[,] matrix, string type)

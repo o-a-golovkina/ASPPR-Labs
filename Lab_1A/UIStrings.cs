@@ -23,5 +23,8 @@
         //M2
         public const string M2SizeRows = "Введіть кількість РЯДКІВ матриці => ";
         public const string M2SizeCols = "Введіть кількість СТОВПЦІВ матриці => ";
+
+        //M3
+        public const string M3Size = "Введіть розмірність розмірність вектора Х => ";
     }
 }

@@ -19,5 +19,9 @@
 
         //M1
         public const string M1Size = "Введіть розмірність квадратної матриці => ";
+
+        //M2
+        public const string M2SizeRows = "Введіть кількість РЯДКІВ матриці => ";
+        public const string M2SizeCols = "Введіть кількість СТОВПЦІВ матриці => ";
     }
 }

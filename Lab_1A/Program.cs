@@ -13,6 +13,7 @@ class Program
 
         while (isRunning)
         {
+            Console.WriteLine();
             Console.WriteLine(UIStrings.MainMenu);
             Console.Write(UIStrings.MenuAnswer);
             int choice = GetValidMenuChoice(0, 3);
@@ -28,21 +29,37 @@ class Program
                     int size = GetValidMenuChoice(2, 100);
 
                     Console.WriteLine($"\n--- Заповнення матриці {size}x{size} ---");
-                    double[,] myMatrix = FillMatrixFromConsole(size);
+                    double[,] myMatrix = FillMatrixFromConsole(size, size);
 
                     Console.WriteLine("\n");
 
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine($"\n--- Обернена матриця ---");
-                    PrintMatrix(InverseMatrix(myMatrix), "invers");
-                    Console.ResetColor();
+                    if (InverseMatrix(myMatrix) != null)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.WriteLine($"\n--- Обернена матриця ---");
 
-                    Console.WriteLine("\n\n");
+                        PrintMatrix(InverseMatrix(myMatrix), "invers");
+                        Console.ResetColor();
+                    }
+                    Console.WriteLine("\n");
 
                     break;
 
                 case 2:
+                    Console.Write(UIStrings.M2SizeRows);
+                    int rows = GetValidMenuChoice(2, 100);
+                    Console.Write(UIStrings.M2SizeCols);
+                    int cols = GetValidMenuChoice(2, 100);
 
+                    Console.WriteLine($"\n--- Заповнення матриці {rows}x{cols} ---");
+                    myMatrix = FillMatrixFromConsole(rows, cols);
+
+                    Console.WriteLine("\n");
+
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine($"\nРанг матриці: " + GetMatrixRank(myMatrix));
+                    Console.ResetColor();
+                    Console.WriteLine();
                     break;
 
                 case 3:
@@ -71,17 +88,17 @@ class Program
         Console.Write(ex);
     }
 
-    static double[,] FillMatrixFromConsole(int size)
+    static double[,] FillMatrixFromConsole(int rows, int cols)
     {
-        double[,] matrix = new double[size, size];
+        double[,] matrix = new double[rows, cols];
 
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < cols; i++)
             Console.Write($"\tX{i + 1}");
 
-        for (int i = 0; i < size; i++) //Rows
+        for (int i = 0; i < rows; i++) //Rows
         {
             Console.Write($"\nY{i + 1}\t");
-            for (int j = 0; j < size; j++) //Columns
+            for (int j = 0; j < cols; j++) //Columns
             {
                 matrix[i, j] = GetDoubleFromKey();
                 Console.Write("\t");
@@ -118,7 +135,7 @@ class Program
                 input += keyChar;
                 Console.Write(keyChar);
             }
-            else if (char.IsDigit(keyChar) && keyChar != '0')
+            else if (char.IsDigit(keyChar))
             {
                 input += keyChar;
                 Console.Write(keyChar);
@@ -142,51 +159,102 @@ class Program
     static double[,] InverseMatrix(double[,] originalMatrix)
     {
         int rows = originalMatrix.GetLength(0);
-        int cols = originalMatrix.GetLength(1);
+
         double[,] inverseMatrix = originalMatrix;
 
         for (int i = 0; i < rows; i++)
         {
-            double[,] tempMatrix = null!;
-            PivotOperation(ref tempMatrix, inverseMatrix, rows, cols, i, i);
-            if (tempMatrix != null)
-                inverseMatrix = tempMatrix;
+            double[,] temp = PivotOperation(inverseMatrix, i, i);
+
+            if (temp != null)
+                inverseMatrix = temp;
+
+            else
+            {
+                WriteError($"Крок неможливий (елемент [{i},{i}] = 0). Матриця вироджена, оберненої не існує.");
+                return null!;
+            }
         }
 
         return inverseMatrix;
     }
 
-    static double[,] PivotOperation(ref double[,] tempMatrix, double[,] previousMatrix, int rows, int cols, int r, int s)
+    static double[,] PivotOperation(double[,] previousMatrix, int r, int s)
     {
+        int rows = previousMatrix.GetLength(0);
+        int cols = previousMatrix.GetLength(1);
         double pivot = previousMatrix[r, s];
 
         if (Math.Abs(pivot) < 1e-10)
-        {
-            WriteError("Розв'язувальний елемент не може дорівнювати нулю.");
-            return tempMatrix;
-        }
+            return null!;
 
-        tempMatrix = new double[rows, cols];
+        double[,] nextMatrix = new double[rows, cols];
 
         for (int i = 0; i < rows; i++)
         {
             for (int j = 0; j < cols; j++)
             {
-                if (i == r && j == s) //Main element
-                    tempMatrix[i, j] = 1.0 / pivot;
-
-                else if (i == r) //Elements in the same row
-                    tempMatrix[i, j] = -previousMatrix[i, j] / pivot;
-
-                else if (j == s) // Elements in the same column
-                    tempMatrix[i, j] = previousMatrix[i, j] / pivot;
-
+                if (i == r && j == s)
+                    nextMatrix[i, j] = 1.0 / pivot;
+                else if (i == r)
+                    nextMatrix[i, j] = -previousMatrix[i, j] / pivot;
+                else if (j == s)
+                    nextMatrix[i, j] = previousMatrix[i, j] / pivot;
                 else
-                    tempMatrix[i, j] = (previousMatrix[i, j] * pivot - previousMatrix[i, s] * previousMatrix[r, j]) / pivot;
+                    nextMatrix[i, j] = (previousMatrix[i, j] * pivot - previousMatrix[i, s] * previousMatrix[r, j]) / pivot;
             }
         }
 
-        return tempMatrix;
+        return nextMatrix;
+    }
+
+    static int GetMatrixRank(double[,] originalMatrix)
+    {
+        int rows = originalMatrix.GetLength(0);
+        int cols = originalMatrix.GetLength(1);
+        double[,] currentMatrix = originalMatrix;
+
+        // Масиви-прапорці: тут відмічаємо рядки та стовпці, які вже використовували як розв'язувальні
+        bool[] usedRows = new bool[rows];
+        bool[] usedCols = new bool[cols];
+
+        int rank = 0;
+        int maxSteps = Math.Min(rows, cols);
+
+        for (int step = 0; step < maxSteps; step++)
+        {
+            double maxPivot = 0;
+            int pivotRow = -1;
+            int pivotCol = -1;
+
+            for (int i = 0; i < rows; i++)
+            {
+                if (usedRows[i]) continue;
+
+                for (int j = 0; j < cols; j++)
+                {
+                    if (usedCols[j]) continue;
+
+                    if (Math.Abs(currentMatrix[i, j]) > Math.Abs(maxPivot))
+                    {
+                        maxPivot = currentMatrix[i, j];
+                        pivotRow = i;
+                        pivotCol = j;
+                    }
+                }
+            }
+
+            if (Math.Abs(maxPivot) < 1e-10)
+                break;
+
+            currentMatrix = PivotOperation(currentMatrix, pivotRow, pivotCol);
+
+            usedRows[pivotRow] = true;
+            usedCols[pivotCol] = true;
+            rank++;
+        }
+
+        return rank;
     }
 
     static void PrintMatrix(double[,] matrix, string type)

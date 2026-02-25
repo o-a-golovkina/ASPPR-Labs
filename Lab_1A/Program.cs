@@ -8,6 +8,7 @@ class Program
     {
         Console.OutputEncoding = Encoding.UTF8;
         Console.InputEncoding = Encoding.UTF8;
+        ILogger logger = new FileLogger("protocol.txt");
 
         bool isRunning = true;
 
@@ -25,26 +26,33 @@ class Program
                     break;
 
                 case 1:
+                    logger.Log("\n\n=== Знаходження оберненої матриці ===\n\nВхідна матриця:");
                     Console.Write(UIStrings.M1Size);
                     int size = GetValidMenuChoice(2, 100);
 
                     Console.WriteLine($"\n--- Заповнення матриці {size}x{size} ---");
                     double[,] myMatrix = FillMatrixFromConsole(size, size);
 
-                    Console.WriteLine("\n");
+                    LogMatrix(myMatrix, logger);
+                    logger.Log("Протокол обчислення:\n");
 
-                    if (InverseMatrix(myMatrix) != null)
+                    Console.WriteLine("\n");
+                    double[,] newMatrix = InverseMatrix(myMatrix, logger);
+
+                    if (newMatrix != null)
                     {
                         Console.ForegroundColor = ConsoleColor.DarkGreen;
                         Console.WriteLine($"\n--- Обернена матриця ---");
-
-                        PrintMatrix(InverseMatrix(myMatrix), "invers");
+                        logger.Log("\nОбернена матриця:");
+                        LogMatrix(newMatrix, logger);
+                        PrintMatrix(newMatrix, "invers");
                         Console.ResetColor();
                     }
                     Console.WriteLine("\n");
                     break;
 
                 case 2:
+                    logger.Log("\n\n=== Знаходження рангу матриці ===\n\nВхідна матриця:");
                     Console.Write(UIStrings.M2SizeRows);
                     int rows = GetValidMenuChoice(2, 100);
                     Console.Write(UIStrings.M2SizeCols);
@@ -53,29 +61,43 @@ class Program
                     Console.WriteLine($"\n--- Заповнення матриці {rows}x{cols} ---");
                     myMatrix = FillMatrixFromConsole(rows, cols);
 
+                    LogMatrix(myMatrix, logger);
+                    logger.Log("Протокол обчислення:\n");
+
                     Console.WriteLine("\n");
 
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine($"\nРанг матриці: " + GetMatrixRank(myMatrix));
+                    int rank = GetMatrixRank(myMatrix, logger);
+                    Console.WriteLine($"\nРанг матриці: " + rank);
+                    logger.Log($"РАНГ МАТРИЦІ: " + rank);
                     Console.ResetColor();
                     Console.WriteLine();
                     break;
 
                 case 3:
+                    logger.Log("\n\n=== Знаходження розв'язків СЛАР за допомогою оберненої матриці ===\n\nВхідна матриця A:");
                     Console.Write(UIStrings.M3Size);
                     int n = GetValidMenuChoice(2, 100);
 
                     Console.WriteLine($"\n--- Заповнення матриці А {n}x{n} ---");
                     myMatrix = FillMatrixFromConsole(n, n);
 
+                    LogMatrix(myMatrix, logger);
+
                     Console.WriteLine("\n");
 
                     Console.WriteLine($"\n--- Заповнення матриці B {n}x{1} ---");
                     double[,] matrixB = FillMatrixFromConsole(n, 1);
 
+                    logger.Log("Вхідна матриця B:");
+                    LogMatrix(matrixB, logger);
+                    logger.Log("Протокол обчислення:\n");
+
                     Console.WriteLine("\n");
 
-                    if (InverseMatrix(myMatrix) == null)
+                    newMatrix = InverseMatrix(myMatrix, logger);
+
+                    if (newMatrix == null)
                     {
                         Console.WriteLine("\n");
                         break;
@@ -84,12 +106,18 @@ class Program
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine($"\n--- Обернена матриця A ---");
 
-                    PrintMatrix(InverseMatrix(myMatrix), "invers");
+                    logger.Log("\nОбернена матриця:");
+                    LogMatrix(newMatrix, logger);
+                    PrintMatrix(newMatrix, "invers");
 
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("\n");
                     Console.WriteLine($"\n--- Обчислення розв'язків Х ---");
-                    Console.WriteLine(VectorX(InverseMatrix(myMatrix), matrixB));
+                    string s = VectorX(newMatrix, matrixB);
+                    Console.WriteLine(s);
+
+                    logger.Log("\nОбчислення розв'язків Х:");
+                    logger.Log(s);
 
                     Console.WriteLine();
                     Console.ResetColor();
@@ -186,34 +214,40 @@ class Program
         }
     }
 
-    static double[,] InverseMatrix(double[,] originalMatrix)
+    static double[,] InverseMatrix(double[,] originalMatrix, ILogger logger)
     {
         int rows = originalMatrix.GetLength(0);
-
         double[,] inverseMatrix = originalMatrix;
 
         for (int i = 0; i < rows; i++)
         {
-            double[,] temp = PivotOperation(inverseMatrix, i, i);
+            logger.Log($"Крок {i + 1}:");
+
+            double[,] temp = PivotOperation(inverseMatrix, i, i, logger);
 
             if (temp != null)
                 inverseMatrix = temp;
-
             else
             {
                 WriteError($"Крок неможливий (елемент [{i},{i}] = 0). Матриця вироджена, оберненої не існує.");
+                logger.Log($"Крок неможливий (елемент [{i},{i}] = 0). Матриця вироджена, оберненої не існує.\n");
                 return null!;
             }
+
+            logger.Log("\nМатриця після виконання ЗЖВ:");
+            LogMatrix(inverseMatrix, logger);
         }
 
         return inverseMatrix;
     }
 
-    static double[,] PivotOperation(double[,] previousMatrix, int r, int s)
+    static double[,] PivotOperation(double[,] previousMatrix, int r, int s, ILogger logger)
     {
         int rows = previousMatrix.GetLength(0);
         int cols = previousMatrix.GetLength(1);
         double pivot = previousMatrix[r, s];
+
+        logger.Log($"Розв'язальний елемент A[{r},{s}] = {pivot:F3}");
 
         if (Math.Abs(pivot) < 1e-10)
             return null!;
@@ -238,7 +272,22 @@ class Program
         return nextMatrix;
     }
 
-    static int GetMatrixRank(double[,] originalMatrix)
+    static void LogMatrix(double[,] matrix, ILogger logger)
+    {
+        int rows = matrix.GetLength(0);
+        int cols = matrix.GetLength(1);
+
+        for (int i = 0; i < rows; i++)
+        {
+            string row = "";
+            for (int j = 0; j < cols; j++)
+                row += $"{matrix[i, j],8:F3}";
+            logger.Log(row);
+        }
+        logger.Log("");
+    }
+
+    static int GetMatrixRank(double[,] originalMatrix, ILogger logger)
     {
         int rows = originalMatrix.GetLength(0);
         int cols = originalMatrix.GetLength(1);
@@ -277,7 +326,12 @@ class Program
             if (Math.Abs(maxPivot) < 1e-10)
                 break;
 
-            currentMatrix = PivotOperation(currentMatrix, pivotRow, pivotCol);
+            logger.Log($"Крок {step + 1}:");
+
+            currentMatrix = PivotOperation(currentMatrix, pivotRow, pivotCol, logger);
+
+            logger.Log("\nМатриця після виконання ЗЖВ:");
+            LogMatrix(currentMatrix, logger);
 
             usedRows[pivotRow] = true;
             usedCols[pivotCol] = true;
@@ -293,11 +347,18 @@ class Program
         double x;
         for (int i = 0; i < matrixA.GetLength(0); i++)
         {
+            str += $"\nX[{i + 1}] = ";
             x = 0;
             for (int j = 0; j < matrixA.GetLength(0); j++)
+            {
                 x += matrixB[j, 0] * matrixA[i, j];
-
-            str += $"\nX[{i + 1}] = {x:F3}";
+                if (matrixA[i, j] < 0)
+                    str += $"{matrixB[j, 0]} * ({matrixA[i, j]:F3}) + ";
+                else
+                    str += $"{matrixB[j, 0]} * {matrixA[i, j]:F3} + ";
+            }
+            str = str.Substring(0, str.Length - 2);
+            str += $"= {x:F3}";
         }
 
         return str;

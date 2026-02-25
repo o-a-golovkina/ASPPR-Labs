@@ -11,9 +11,6 @@
         <li><a href="#featuresy">✔️ Features</a></li>
       </ul>
       <ul>
-        <li><a href="#technologies-used">🛠 Technologies Used</a></li>
-      </ul>
-      <ul>
         <li><a href="#project-structure">📂 Project Structure</a></li>
       </ul>
     </li>

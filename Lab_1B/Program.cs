@@ -535,6 +535,28 @@ class Program
             LogMatrix(t, logger);
         }
 
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        Console.WriteLine("\n--- Пошук опорного розв'язку (кінцева симплекс-таблиця) ---");
+        logger.Log("\n--- Пошук опорного розв'язку (кінцева симплекс-таблиця) ---");
+
+        // Друкуємо проміжну таблицю
+        PrintSimplexTable(t, varLabels, rowLabels);
+        LogMatrix(t, logger);
+
+        // Формуємо вектор X для опорного розв'язку
+        double[] xOpor = new double[n];
+        for (int i = 0; i < n; i++)
+        {
+            // Шукаємо x незалежно від регістру
+            int rIndex = Array.FindIndex(rowLabels, lbl => lbl.Equals($"x{i + 1}", StringComparison.OrdinalIgnoreCase));
+            xOpor[i] = (rIndex >= 0) ? t[rIndex, rhs] : 0;
+        }
+
+        string xOporStr = string.Join("; ", xOpor.Select(v => Math.Abs(v) < 1e-10 ? "0" : v.ToString("0.###")));
+        Console.WriteLine($"Опорний розв'язок:\nX = ({xOporStr})\n");
+        logger.Log($"Опорний розв'язок:\nX = ({xOporStr})\n");
+        Console.ResetColor();
+
         // ==========================================
         // Пошук оптимального розв'язку (Прямий метод)
         // ==========================================
@@ -612,7 +634,7 @@ class Program
         for (int i = 0; i < originalVarsCount; i++)
         {
             string targetVar = $"x{i + 1}";
-            int rowIndex = Array.IndexOf(rowLabels, targetVar);
+            int rowIndex = Array.FindIndex(rowLabels, lbl => lbl.Equals($"x{i + 1}", StringComparison.OrdinalIgnoreCase));
 
             if (rowIndex >= 0) x[i] = t[rowIndex, rhs];
             else x[i] = 0;

@@ -8,7 +8,16 @@
     <li>
       <a href="#lab-work-1--part-a">🅰️ Lab Work 1 – Part A</a>
       <ul>
-        <li><a href="#featuresy">✔️ Features</a></li>
+        <li><a href="#features">✔️ Features</a></li>
+      </ul>
+      <ul>
+        <li><a href="#project-structure">📂 Project Structure</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#lab-work-1--part-b">🅱️ Lab Work 1 – Part B</a>
+      <ul>
+        <li><a href="#features">✔️ Features</a></li>
       </ul>
       <ul>
         <li><a href="#project-structure">📂 Project Structure</a></li>
@@ -39,6 +48,30 @@ This laboratory work implements a console application in C# that allows users to
 │   ├── ILogger.cs
 │   ├── Lab_1A.csproj
 │   ├── Lab_1A.sln
+│   ├── Program.cs
+│   └── UIStrings.cs
+└── README.md
+```
+## 🅱️ Lab Work 1 – Part B    ![Language](https://img.shields.io/badge/Language-C%23-purple) ![Platform](https://img.shields.io/badge/Platform-.NET-blue) ![Type](https://img.shields.io/badge/Application-Console-green)
+
+This laboratory work implements a console application in C# that allows users to work with matrices and solve systems of linear algebraic equations with searchibg support and optimal solutions.
+
+#### ✔️ Features
+
+- [x] Matrix validation
+- [x] Inverse matrix calculation
+- [x] Rank computation
+- [x] SLAE solving with searching support and optimal solutions
+- [x] Computation logging
+
+#### 📂 Project Structure
+
+``` id="tree01"
+├── Lab1-PartB
+│   ├── FileLogger.cs
+│   ├── ILogger.cs
+│   ├── Lab_1B.csproj
+│   ├── Lab_1B.sln
 │   ├── Program.cs
 │   └── UIStrings.cs
 └── README.md

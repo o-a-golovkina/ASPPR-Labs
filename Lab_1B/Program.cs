@@ -563,7 +563,7 @@ class Program
 
             for (int i = 0; i < m; i++)
             {
-                if (t[i, pivotCol] > 1e-10) м
+                if (t[i, pivotCol] > 1e-10)
                 {
                     double ratio = t[i, rhs] / t[i, pivotCol];
                     if (ratio < minRatio)

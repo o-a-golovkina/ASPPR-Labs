@@ -23,8 +23,16 @@
         <li><a href="#project-structure">📂 Project Structure</a></li>
       </ul>
     </li>
+    <li>
+      <a href="#lab-work-1--part-a">©️ Lab Work 1 – Part C</a>
+      <ul>
+        <li><a href="#features">✔️ Features</a></li>
+      </ul>
+      <ul>
+        <li><a href="#project-structure">📂 Project Structure</a></li>
+      </ul
   </ol>
-> </details>
+</details>
 
 ---
 
@@ -75,3 +83,25 @@ This laboratory work implements a console application in C# that allows users to
 │   ├── Program.cs
 │   └── UIStrings.cs
 └── README.md
+```
+
+## ©️ Lab Work 1 – Part C    ![Language](https://img.shields.io/badge/Language-C%23-purple) ![Platform](https://img.shields.io/badge/Platform-.NET-blue) ![Type](https://img.shields.io/badge/Application-Console-green)
+
+This laboratory work implements a console application in C# that allows users to work with matrices and solve systems of linear algebraic equations with a mixed system of restrictions.
+
+#### ✔️ Features
+
+- [x] Matrix validation
+- [x] SLAE solving
+- [x] Deleting zero rows of a matrix
+- [x] Computation logging
+
+#### 📂 Project Structure
+
+``` id="tree01"
+├── Lab1-PartC
+│   ├── Lab_1C.csproj
+│   ├── Lab_1C.sln
+│   ├── Program.cs
+└── README.md
+```

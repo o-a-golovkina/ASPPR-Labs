@@ -13,4 +13,3 @@
         File.AppendAllText(_filePath, message + "\n");
     }
 }
-}

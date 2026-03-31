@@ -14,13 +14,10 @@ class Program
         while (isRunning)
         {
             Console.WriteLine();
-            Console.BackgroundColor = ConsoleColor.Magenta;
-            Console.ForegroundColor = ConsoleColor.White;
             Console.Write("┌───────── ГОЛОВНЕ МЕНЮ ──────────┐\n");
             Console.Write("│ 1 - Ввести матрицю вручну       │\n");
             Console.Write("│ 0 - Вихід                       │\n");
             Console.Write("└─────────────────────────────────┘\n");
-            Console.ResetColor();
             Console.Write("Відповідь => ");
 
             int choice = GetValidMenuChoice(0, 1);
@@ -56,12 +53,9 @@ class Program
                 for (int i = 0; i < rows - 1; i++) yLabels[i] = "y" + (i + 1);
                 yLabels[rows - 1] = "z";
             }
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Оберіть тип задачі:   ");
             Console.Write("1 - Пошук максимума   \n");
             Console.Write("2 - Пошук мінімума    \n");
-            Console.ResetColor();
             Console.Write("Відповідь => ");
             int taskType = GetValidMenuChoice(1, 2);
 

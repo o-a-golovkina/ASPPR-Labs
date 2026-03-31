@@ -6,7 +6,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#lab-work-1--part-a">🅰️ Lab Work 1 – Part A</a>
+      <a href="#lab-work-1--part-a">Ⓐ Lab Work 1 – Part A</a>
       <ul>
         <li><a href="#features">✔️ Features</a></li>
       </ul>
@@ -15,7 +15,7 @@
       </ul>
     </li>
     <li>
-      <a href="#lab-work-1--part-b">🅱️ Lab Work 1 – Part B</a>
+      <a href="#lab-work-1--part-b">Ⓑ Lab Work 1 – Part B</a>
       <ul>
         <li><a href="#features">✔️ Features</a></li>
       </ul>
@@ -24,19 +24,28 @@
       </ul>
     </li>
     <li>
-      <a href="#lab-work-1--part-a">©️ Lab Work 1 – Part C</a>
+      <a href="#lab-work-1--part-a">Ⓒ Lab Work 1 – Part C</a>
       <ul>
         <li><a href="#features">✔️ Features</a></li>
       </ul>
       <ul>
         <li><a href="#project-structure">📂 Project Structure</a></li>
-      </ul
+      </ul>
+      <li>
+      <a href="#lab-work-1--part-a">Ⓓ Lab Work 1 – Part D</a>
+      <ul>
+        <li><a href="#features">✔️ Features</a></li>
+      </ul>
+      <ul>
+        <li><a href="#project-structure">📂 Project Structure</a></li>
+      </ul>
+    </li>
   </ol>
 </details>
 
 ---
 
-## 🅰️ Lab Work 1 – Part A    ![Language](https://img.shields.io/badge/Language-C%23-purple) ![Platform](https://img.shields.io/badge/Platform-.NET-blue) ![Type](https://img.shields.io/badge/Application-Console-green)
+## Ⓐ Lab Work 1 – Part A    ![Language](https://img.shields.io/badge/Language-C%23-purple) ![Platform](https://img.shields.io/badge/Platform-.NET-blue) ![Type](https://img.shields.io/badge/Application-Console-green)
 
 This laboratory work implements a console application in C# that allows users to work with matrices and solve systems of linear algebraic equations.
 
@@ -60,9 +69,9 @@ This laboratory work implements a console application in C# that allows users to
 │   └── UIStrings.cs
 └── README.md
 ```
-## 🅱️ Lab Work 1 – Part B    ![Language](https://img.shields.io/badge/Language-C%23-purple) ![Platform](https://img.shields.io/badge/Platform-.NET-blue) ![Type](https://img.shields.io/badge/Application-Console-green)
+## Ⓑ Lab Work 1 – Part B    ![Language](https://img.shields.io/badge/Language-C%23-purple) ![Platform](https://img.shields.io/badge/Platform-.NET-blue) ![Type](https://img.shields.io/badge/Application-Console-green)
 
-This laboratory work implements a console application in C# that allows users to work with matrices and solve systems of linear algebraic equations with searchibg support and optimal solutions.
+This laboratory work implements a console application in C# that allows users to work with matrices and solve systems of linear algebraic equations with searching support and optimal solutions.
 
 #### ✔️ Features
 
@@ -85,7 +94,7 @@ This laboratory work implements a console application in C# that allows users to
 └── README.md
 ```
 
-## ©️ Lab Work 1 – Part C    ![Language](https://img.shields.io/badge/Language-C%23-purple) ![Platform](https://img.shields.io/badge/Platform-.NET-blue) ![Type](https://img.shields.io/badge/Application-Console-green)
+## Ⓒ Lab Work 1 – Part C    ![Language](https://img.shields.io/badge/Language-C%23-purple) ![Platform](https://img.shields.io/badge/Platform-.NET-blue) ![Type](https://img.shields.io/badge/Application-Console-green)
 
 This laboratory work implements a console application in C# that allows users to work with matrices and solve systems of linear algebraic equations with a mixed system of restrictions.
 
@@ -105,3 +114,27 @@ This laboratory work implements a console application in C# that allows users to
 │   ├── Program.cs
 └── README.md
 ```
+
+## Ⓓ Lab Work 1 – Part D    ![Language](https://img.shields.io/badge/Language-C%23-purple) ![Platform](https://img.shields.io/badge/Platform-.NET-blue) ![Type](https://img.shields.io/badge/Application-Console-green)
+
+This laboratory work implements a console application in C# that allows users to work with matrices and solve systems of linear algebraic equations with searching **integers** support and optimal solutions.
+
+#### ✔️ Features
+
+- [x] Matrix validation
+- [x] SLAE solving
+- [x] Searching integers solutions
+- [x] Computation logging
+
+#### 📂 Project Structure
+
+``` id="tree01"
+├── Lab1-PartD
+│   ├── Lab_1D.csproj
+│   ├── Lab_1D.sln
+│   ├── FileLogger.cs
+│   ├── ILogger.cs
+│   ├── Program.cs
+└── README.md
+```
+

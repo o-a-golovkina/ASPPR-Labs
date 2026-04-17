@@ -6,7 +6,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#lab-work-1--part-a">Ⓐ Lab Work 1 – Part A</a>
+      <a href="#lab-work-1--part-a">1️⃣Ⓐ Lab Work 1 – Part A</a>
       <ul>
         <li><a href="#features">✔️ Features</a></li>
       </ul>
@@ -15,7 +15,7 @@
       </ul>
     </li>
     <li>
-      <a href="#lab-work-1--part-b">Ⓑ Lab Work 1 – Part B</a>
+      <a href="#lab-work-1--part-b">1️⃣Ⓑ Lab Work 1 – Part B</a>
       <ul>
         <li><a href="#features">✔️ Features</a></li>
       </ul>
@@ -24,7 +24,7 @@
       </ul>
     </li>
     <li>
-      <a href="#lab-work-1--part-a">Ⓒ Lab Work 1 – Part C</a>
+      <a href="#lab-work-1--part-a">1️⃣Ⓒ Lab Work 1 – Part C</a>
       <ul>
         <li><a href="#features">✔️ Features</a></li>
       </ul>
@@ -32,7 +32,16 @@
         <li><a href="#project-structure">📂 Project Structure</a></li>
       </ul>
       <li>
-      <a href="#lab-work-1--part-a">Ⓓ Lab Work 1 – Part D</a>
+      <a href="#lab-work-1--part-a">1️⃣Ⓓ Lab Work 1 – Part D</a>
+      <ul>
+        <li><a href="#features">✔️ Features</a></li>
+      </ul>
+      <ul>
+        <li><a href="#project-structure">📂 Project Structure</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#lab-work-1--part-a">2️⃣ Lab Work 2</a>
       <ul>
         <li><a href="#features">✔️ Features</a></li>
       </ul>
@@ -138,3 +147,25 @@ This laboratory work implements a console application in C# that allows users to
 └── README.md
 ```
 
+## 2️⃣ Lab Work 2    ![Language](https://img.shields.io/badge/Language-C%23-purple) ![Platform](https://img.shields.io/badge/Platform-.NET-blue) ![Type](https://img.shields.io/badge/Application-Console-green)
+
+This laboratory work implements a console application in C# that allows users to construct and solve pairs of **dual linear programming problems** using the simplex method and the graphical method.
+
+#### ✔️ Features
+
+- [x] Construction of a dual linear programming problem
+- [x] Solving primal and dual problems using the simplex method
+- [x] Direct solution of the dual problem via simplex tables
+- [x] Comparison of optimal solutions for primal and dual problems
+
+#### 📂 Project Structure
+
+``` id="tree01"
+├── Lab_2
+│   ├── Lab_2.csproj
+│   ├── Lab_2.sln
+│   ├── FileLogger.cs
+│   ├── ILogger.cs
+│   ├── Program.cs
+└── README.md
+```

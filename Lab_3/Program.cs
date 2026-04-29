@@ -143,6 +143,13 @@ namespace Lab_3
                     ModelingSolution(matrixA1);
 
                 }
+
+                if (choice == 3)
+                {
+                    Console.WriteLine("Розв'язання матричної гри А2 аналітичним способом");
+                    AnalyticSolution(matrixA2);
+
+                }
             }
         }
 
@@ -327,6 +334,84 @@ namespace Lab_3
                 if (randomVal < cumulative) return i;
             }
             return probabilities.Length - 1;
+        }
+
+        static void AnalyticSolution(double[,] matrix)
+        {
+            double a11 = matrix[0, 0];
+            double a12 = matrix[0, 1];
+            double a21 = matrix[1, 0];
+            double a22 = matrix[1, 1];
+
+            // 1. Розрахунок нижньої та верхньої ціни гри (max min / min max)
+            double alpha = Math.Max(Math.Min(a11, a12), Math.Min(a21, a22));
+            double beta = Math.Min(Math.Max(a11, a21), Math.Max(a12, a22));
+
+            Console.WriteLine($"max min = {alpha}");
+            Console.WriteLine($"min max = {beta}");
+
+            // 2. Вивід системи рівнянь як на картинці
+            Console.WriteLine("\nПобудуємо систему лінійних рівнянь для 1-го гравця:");
+            Console.WriteLine("{");
+            Console.WriteLine($"  {a11}x1 + {a21}x2 = v");
+            Console.WriteLine($"  {a12}x1 + {a22}x2 = v");
+            Console.WriteLine("  x1 + x2 = 1");
+            Console.WriteLine("}");
+
+            // 3. Математичний розв'язок системи
+            // Формула виведена з віднімання рівнянь: x1(a11 - a12) + x2(a21 - a22) = 0
+            double denominator = (a11 + a22) - (a12 + a21);
+
+            if (Math.Abs(denominator) < 1e-9)
+            {
+                Console.WriteLine("\nЗнаменник дорівнює 0. Система не має одного чіткого розв'язку.");
+                return;
+            }
+
+            double x1 = (a22 - a21) / denominator;
+            double x2 = 1 - x1;
+            double v = a11 * x1 + a21 * x2;
+
+            Console.WriteLine("\nРезультат розв'язання системи:");
+            Console.WriteLine($"x1 = {x1:F4}");
+            Console.WriteLine($"x2 = {x2:F4}");
+            Console.WriteLine($"v = {v:F4}");
+
+            Console.WriteLine("\nПобудуємо систему лінійних рівнянь для 2-го гравця:");
+            Console.WriteLine("{");
+            Console.WriteLine($"  {a11}y1 + {a12}y2 = v");
+            Console.WriteLine($"  {a21}y1 + {a22}y2 = v");
+            Console.WriteLine("  y1 + y2 = 1");
+            Console.WriteLine("}");
+
+            // 2. Розрахунок
+            denominator = (a11 + a22) - (a12 + a21);
+
+            if (Math.Abs(denominator) < 1e-9)
+            {
+                Console.WriteLine("Система не має однозначного розв'язку.");
+                return;
+            }
+
+            // Формули для y1 та y2
+            double y1 = (a22 - a12) / denominator;
+            double y2 = 1 - y1;
+            v = a11 * y1 + a12 * y2;
+
+            // 3. Вивід результату
+            Console.WriteLine("\nРезультат розв'язання системи для 2-го гравця:");
+            Console.WriteLine($"y1 = {y1:F4}");
+            Console.WriteLine($"y2 = {y2:F4}");
+            Console.WriteLine($"v = {v:F4}");
+
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine($"\nОптимальнs стратегії гравців:");
+            Console.ResetColor();
+            Console.WriteLine($"  X = ({x1:F2}; {x2:F2})");
+            Console.WriteLine($"  Y = ({y1:F2}; {y2:F2})");
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine($"\nЦіна гри v = {v:F2}\n");
+            Console.ResetColor();
         }
 
         static void PrintFinalOptimalSolutions(double[,] matrix, string[] tL, string[] pL, int originalRows, int originalCols, double minDigit)

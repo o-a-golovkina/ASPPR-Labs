@@ -45,6 +45,12 @@ namespace Lab_3
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
 
+            string logFilePath = "protocol.txt";
+            File.WriteAllText(logFilePath, $"--- ПРОТОКОЛ ({DateTime.Now}) ---\n", Encoding.UTF8);
+
+            DualWriter dualWriter = new DualWriter(Console.Out, logFilePath);
+            Console.SetOut(dualWriter);
+
             while (true)
             {
                 double minDigit = 0;
@@ -576,7 +582,6 @@ namespace Lab_3
             }
             matrix = next;
 
-            // ОБМІН ВАШИХ МІТОК
             string tempT = t[col]; t[col] = p[pivotRow]; p[pivotRow] = tempT;
             string tempQ = q[col]; q[col] = r[pivotRow]; r[pivotRow] = tempQ;
 

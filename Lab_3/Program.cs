@@ -141,12 +141,22 @@ namespace Lab_3
                 for (int i = 0; i < cols - 1; i++) { tLabels[i] = "t" + (i + 1); qLabels[i] = "-q" + (i + 1); }
                 tLabels[cols - 1] = "W"; qLabels[cols - 1] = "1";
 
-                SolveProblem(newMatrix, tLabels, qLabels, pLabels, rLabels, 1, minDigit);
+                double[] X0 = new double[rows];
+                double[] Y0 = new double[rows];
+
+                SolveProblem(newMatrix, tLabels, qLabels, pLabels, rLabels, 1, minDigit, ref X0, ref Y0);
+
+                if (choice == 0)
+                {
+                    Console.WriteLine("Моделювання результатів розв'язання матричної гри тестової матриці №1");
+                    ModelingSolution(testMatrix1, X0, Y0);
+
+                }
 
                 if (choice == 2)
                 {
                     Console.WriteLine("Моделювання результатів розв'язання матричної гри А1");
-                    ModelingSolution(matrixA1);
+                    ModelingSolution(matrixA1, X0, Y0);
 
                 }
 
@@ -281,12 +291,9 @@ namespace Lab_3
             return -1;
         }
 
-        static void ModelingSolution(double[,] A1)
+        static void ModelingSolution(double[,] A1, double[] X_theory, double[] Y_theory)
         {
-            double[] X_theory = { 0.17, 0.17, 0.67 }; // Гравець А
-            double[] Y_theory = { 0.33, 0.33, 0.33 }; // Гравець В
-
-            int nParties = 20;
+            int nParties = 50;
 
             Random rand = new Random();
             double totalPayoff = 0;
@@ -314,7 +321,6 @@ namespace Lab_3
                 totalPayoff += payoff;
                 double averagePayoff = totalPayoff / k;
 
-                // Вивід рядка протоколу
                 Console.WriteLine($"{k,-4} | {rA,8:F4} | {stratA + 1,-6} | {rB,8:F4} | {stratB + 1,-6} | {payoff,8:F2} | {totalPayoff,8:F2} | {averagePayoff,10:F4}");
             }
             Console.WriteLine(new string('-', 110));
@@ -420,7 +426,7 @@ namespace Lab_3
             Console.ResetColor();
         }
 
-        static void PrintFinalOptimalSolutions(double[,] matrix, string[] tL, string[] pL, int originalRows, int originalCols, double minDigit)
+        static void PrintFinalOptimalSolutions(double[,] matrix, string[] tL, string[] pL, int originalRows, int originalCols, double minDigit, ref double[] X0, ref double[] Y0)
         {
             int rows = matrix.GetLength(0);
             int cols = matrix.GetLength(1);
@@ -461,6 +467,9 @@ namespace Lab_3
             Console.WriteLine($"  U = ({string.Join("; ", U.Select(v => (Math.Abs(v) < 1e-9 ? 0.0 : v).ToString("F2")))});");
             Console.WriteLine($"  Max (Z) = Min (W) = {zSum:F2}.\n");
 
+            X0 = U.Select(v => Math.Abs(v) < 1e-9 ? 0.0 : v / zSum).ToArray();
+            Y0 = X.Select(v => Math.Abs(v) < 1e-9 ? 0.0 : v / zSum).ToArray();
+
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("Змішана стратегія 1-го гравця:");
             Console.ResetColor();
@@ -479,7 +488,7 @@ namespace Lab_3
             Console.ResetColor();
         }
 
-        static void SolveProblem(double[,] matrix, string[] tL, string[] qL, string[] pL, string[] rL, int taskType, double minDigit)
+        static void SolveProblem(double[,] matrix, string[] tL, string[] qL, string[] pL, string[] rL, int taskType, double minDigit, ref double[] X0, ref double[] Y0)
         {
             Console.WriteLine("\nПочаткова симплекс-таблиця:");
             Console.WriteLine(PrintPairMatrix(matrix, tL, qL, pL, rL));
@@ -502,7 +511,7 @@ namespace Lab_3
             int originalRows = matrix.GetLength(0) - 1;
             int originalCols = matrix.GetLength(1) - 1;
 
-            PrintFinalOptimalSolutions(matrix, tL, pL, originalRows, originalCols, minDigit);
+            PrintFinalOptimalSolutions(matrix, tL, pL, originalRows, originalCols, minDigit, ref X0, ref Y0);
         }
 
         static bool FindBasicSolution(ref double[,] matrix, ref string[] t, ref string[] q, ref string[] p, ref string[] r)

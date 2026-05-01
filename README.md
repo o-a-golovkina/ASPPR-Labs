@@ -32,7 +32,7 @@
         <li><a href="#project-structure">📂 Project Structure</a></li>
       </ul>
       <li>
-      <a href="#lab-work-1--part-a">1️⃣Ⓓ Lab Work 1 – Part D</a>
+      <a href="#lab-work-1--part-d">1️⃣Ⓓ Lab Work 1 – Part D</a>
       <ul>
         <li><a href="#features">✔️ Features</a></li>
       </ul>
@@ -41,7 +41,25 @@
       </ul>
     </li>
     <li>
-      <a href="#lab-work-1--part-a">2️⃣ Lab Work 2</a>
+      <a href="#lab-work-2">2️⃣ Lab Work 2</a>
+      <ul>
+        <li><a href="#features">✔️ Features</a></li>
+      </ul>
+      <ul>
+        <li><a href="#project-structure">📂 Project Structure</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#lab-work-3">3️⃣ Lab Work 3</a>
+      <ul>
+        <li><a href="#features">✔️ Features</a></li>
+      </ul>
+      <ul>
+        <li><a href="#project-structure">📂 Project Structure</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#lab-work-4">4️⃣ Lab Work 4</a>
       <ul>
         <li><a href="#features">✔️ Features</a></li>
       </ul>
@@ -166,6 +184,51 @@ This laboratory work implements a console application in C# that allows users to
 │   ├── Lab_2.sln
 │   ├── FileLogger.cs
 │   ├── ILogger.cs
+│   ├── Program.cs
+└── README.md
+```
+
+## 3️⃣ Lab Work 3    ![Language](https://img.shields.io/badge/Language-C%23-purple) ![Platform](https://img.shields.io/badge/Platform-.NET-blue) ![Type](https://img.shields.io/badge/Application-Console-green)
+
+This laboratory work implements a console application in C# that allows users to analyze and solve matrix games of different dimensions using both analytical methods and simulation techniques.
+
+#### ✔️ Features
+
+- [x] Checking for saddle points (pure strategy solutions) in matrix games
+- [x] Solving matrix games in mixed strategies via dual linear programming problems
+- [x] Analytical and graphical solution of 2×2 games
+- [x] Reduction of 2×n or m×2 games to 2×2 form
+- [x] Simulation of game outcomes using uniformly distributed random numbers
+- [x] Generation of experimental strategies and simulation logs
+
+#### 📂 Project Structure
+
+``` id="tree01"
+├── Lab_3
+│   ├── Lab_3.csproj
+│   ├── Lab_3.sln
+│   ├── DualWriter.cs
+│   ├── Program.cs
+└── README.md
+```
+
+## 4️⃣ Lab Work 4    ![Language](https://img.shields.io/badge/Language-C%23-purple) ![Platform](https://img.shields.io/badge/Platform-.NET-blue) ![Type](https://img.shields.io/badge/Application-Console-green)
+
+This laboratory work implements a console application in C# that allows users to determine optimal strategies in decision-making problems under uncertainty (games against nature) based on a given utility matrix.
+
+#### ✔️ Features
+
+- [x] nput and validation of the utility matrix
+- [x] Determination of optimal strategies using classical decision criteria
+- [x] Support for multiple decision-making approaches under uncertainty
+- [x] Clear presentation of results for each criterion
+
+#### 📂 Project Structure
+
+``` id="tree01"
+├── Lab_4
+│   ├── Lab_4.csproj
+│   ├── Lab_4.sln
 │   ├── Program.cs
 └── README.md
 ```

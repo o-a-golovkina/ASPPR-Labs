@@ -9,6 +9,12 @@ namespace Lab_5
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
 
+            string logFilePath = "protocol.txt";
+            File.WriteAllText(logFilePath, $"--- ПРОТОКОЛ ({DateTime.Now}) ---\n", Encoding.UTF8);
+
+            DualWriter dualWriter = new DualWriter(Console.Out, logFilePath);
+            Console.SetOut(dualWriter);
+
             //Input data for TEST1
             int[,] test1SP = //prices (small squares)
             {

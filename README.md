@@ -67,6 +67,24 @@
         <li><a href="#project-structure">📂 Project Structure</a></li>
       </ul>
     </li>
+    <li>
+      <a href="#lab-work-5">5️⃣ Lab Work 5</a>
+      <ul>
+        <li><a href="#features">✔️ Features</a></li>
+      </ul>
+      <ul>
+        <li><a href="#project-structure">📂 Project Structure</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#dz-project">🟥 DZ Project</a>
+      <ul>
+        <li><a href="#features">✔️ Features</a></li>
+      </ul>
+      <ul>
+        <li><a href="#project-structure">📂 Project Structure</a></li>
+      </ul>
+    </li>
   </ol>
 </details>
 
@@ -218,7 +236,7 @@ This laboratory work implements a console application in C# that allows users to
 
 #### ✔️ Features
 
-- [x] nput and validation of the utility matrix
+- [x] Input and validation of the utility matrix
 - [x] Determination of optimal strategies using classical decision criteria
 - [x] Support for multiple decision-making approaches under uncertainty
 - [x] Clear presentation of results for each criterion
@@ -230,5 +248,56 @@ This laboratory work implements a console application in C# that allows users to
 │   ├── Lab_4.csproj
 │   ├── Lab_4.sln
 │   ├── Program.cs
+└── README.md
+```
+
+## 5️⃣ Lab Work 5    ![Language](https://img.shields.io/badge/Language-C%23-purple) ![Platform](https://img.shields.io/badge/Platform-.NET-blue) ![Type](https://img.shields.io/badge/Application-Console-green)
+
+This laboratory work implements a console application in C# that allows users to analyze and solve transportation problems, including determining whether the problem is open or closed, constructing feasible transportation plans, and finding optimal solutions using classical optimization methods.
+
+#### ✔️ Features
+- [x] Input and validation of supply (points of origin), demand (points of destination), and transportation cost matrices
+- [x] Determination of whether the transportation problem is open or closed
+- [x] Automatic balancing of open problems by introducing a dummy origin or destination
+- [x] Construction of an initial feasible solution using the Northwest Corner Method
+- [x] Construction of an initial feasible solution using the Least Cost Method
+- [x] Optimization of the transportation plan using the Potential Method (MODI method)
+- [x] Formulation of the transportation problem as a linear programming model
+- [x] Construction of the simplex tableau for the transportation problem
+- [x] Solution of the transportation problem using the simplex method
+- [x] Verification of results using Excel Solver (Data → Solver)
+#### 📂 Project Structure
+
+``` id="tree01"
+├── Lab_5
+│   ├── Lab_5.csproj
+│   ├── Lab_5.sln
+│   ├── Program.cs
+│   ├── DualWriter.cs
+└── README.md
+```
+
+## 🟥 DZ Project    ![Language](https://img.shields.io/badge/Language-C%23-purple) ![Platform](https://img.shields.io/badge/Platform-.NET-blue) ![Type](https://img.shields.io/badge/Application-Console-green)
+
+This laboratory work implements a console application in C# that allows users to solve multi-objective linear programming problems and analyze decision-making using game theory and compromise solutions.
+
+#### ✔️ Features
+- [x] Solving linear programming problems with a single objective function and a common feasible region using the simplex method
+- [x] Support for multiple objective functions within the same constraint system
+- [x] Construction of the non-optimality measure matrix for each optimal solution relative to other objective functions
+- [x] Formulation of a game-theoretic model where strategies of the first player correspond to optimal solutions, and strategies of the second player correspond to objective functions
+- [x] Solving the game in mixed strategies for the first player
+- [x] Determination of weighting coefficients for criteria aggregation
+- [x] Calculation of the compromise solution vector based on selected weights
+- [x] Clear presentation and interpretation of results for each stage of analysis
+
+#### 📂 Project Structure
+
+``` id="tree01"
+├── DZ
+│   ├── DZ.csproj
+│   ├── DZ.sln
+│   ├── Program.cs
+│   ├── DualWriter.cs
 └── README.md
 ```

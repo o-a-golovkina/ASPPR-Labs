@@ -77,6 +77,15 @@
       </ul>
     </li>
     <li>
+      <a href="#lab-work-6">6️⃣ Lab Work 6</a>
+      <ul>
+        <li><a href="#features">✔️ Features</a></li>
+      </ul>
+      <ul>
+        <li><a href="#project-structure">📂 Project Structure</a></li>
+      </ul>
+    </li>
+    <li>
       <a href="#dz-project">🟥 DZ Project</a>
       <ul>
         <li><a href="#features">✔️ Features</a></li>
@@ -266,6 +275,7 @@ This laboratory work implements a console application in C# that allows users to
 - [x] Construction of the simplex tableau for the transportation problem
 - [x] Solution of the transportation problem using the simplex method
 - [x] Verification of results using Excel Solver (Data → Solver)
+      
 #### 📂 Project Structure
 
 ``` id="tree01"
@@ -274,6 +284,28 @@ This laboratory work implements a console application in C# that allows users to
 │   ├── Lab_5.sln
 │   ├── Program.cs
 │   ├── DualWriter.cs
+└── README.md
+```
+
+## 6️⃣ Lab Work 6    ![Language](https://img.shields.io/badge/Language-C%23-purple) ![Platform](https://img.shields.io/badge/Platform-.NET-blue) ![Type](https://img.shields.io/badge/Application-Console-green)
+
+This laboratory work implements a console application in C# that allows users to solve assignment problems using optimization methods and validate results through linear programming techniques.
+
+#### ✔️ Features
+- [x] Input and validation of the cost matrix for assigning employees to tasks
+- [x] Optimal assignment of employees to tasks using the Hungarian Method
+- [x] Formulation of the assignment problem as a linear programming model
+- [x] Construction of the simplex tableau for the assignment problem
+- [x] Solution of the assignment problem using the simplex method
+- [x] Verification of results using Excel Solver (Data → Solver)
+      
+#### 📂 Project Structure
+
+``` id="tree01"
+├── Lab_6
+│   ├── Lab_6.csproj
+│   ├── Lab_6.sln
+│   ├── Program.cs
 └── README.md
 ```
 

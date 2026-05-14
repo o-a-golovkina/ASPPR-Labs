@@ -86,6 +86,15 @@
       </ul>
     </li>
     <li>
+      <a href="#lab-work-7">7️ Lab Work 7</a>
+      <ul>
+        <li><a href="#features">✔️ Features</a></li>
+      </ul>
+      <ul>
+        <li><a href="#project-structure">📂 Project Structure</a></li>
+      </ul>
+    </li>
+    <li>
       <a href="#dz-project">🟥 DZ Project</a>
       <ul>
         <li><a href="#features">✔️ Features</a></li>
@@ -306,6 +315,30 @@ This laboratory work implements a console application in C# that allows users to
 │   ├── Lab_6.csproj
 │   ├── Lab_6.sln
 │   ├── Program.cs
+└── README.md
+```
+
+## 7️ Lab Work 7    ![Language](https://img.shields.io/badge/Language-C%23-purple) ![Platform](https://img.shields.io/badge/Platform-.NET-blue) ![Type](https://img.shields.io/badge/Application-Console-green)
+
+This laboratory work implements a console application in C# that allows users to build and analyze a project network schedule, determine the critical path, and optimize the project calendar plan and human resource workload.
+
+#### ✔️ Features
+- [x] Construction of a project network schedule
+- [x] Calculation of network schedule parameters, including early start/finish times, late start/finish times, and time reserves
+- [x] Identification of the critical path of project activities
+- [x] Calculation of the critical path length, representing the total project duration
+- [x] Construction and optimization of the project calendar schedule
+- [x] Construction and optimization of the human resource workload chart
+- [x] Verification of the results using the online service GanttPRO
+      
+#### 📂 Project Structure
+
+``` id="tree01"
+├── Lab_7
+│   ├── Lab_7.csproj
+│   ├── Lab_7.sln
+│   ├── Program.cs
+│   ├── Work.cs
 └── README.md
 ```
 
